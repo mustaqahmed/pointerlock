@@ -173,29 +173,63 @@
     </section>
     <section>
       <h2>
-        <code>pointerlockchange</code> and <code>pointerlockerror</code> Events
+        Pointer Lock and Interfaces
       </h2>
-      <p>
-        Two events are used to communicate pointer lock state change or an
-        error in changing state. They are named <dfn>pointerlockchange</dfn>
-        and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
-        for any reason a <a>pointerlockchange</a> event must be sent.
-      </p>
-      <p>
-        <a>User agents</a> must deliver these events by <a data-lt=
-        "queue a task">queuing a task</a> to <a>fire an event</a> of the
-        appropriate name with its <code>bubbles</code> attribute [[DOM]] set to
-        false to the pointer lock <a>target</a> element's <a>node document</a>.
-      </p>
-      <p class="note">
-        Magnification software increases the size of content on the screen. It
-        uses the mouse to move the magnified point of focus around. When a
-        pointer lock is initiated, the magnification software needs to switch
-        to using the keyboard to move the magnified point of focus around
-        instead. When a pointerlockchange event is fired, web browsers
-        therefore need to make sure the event is communicated to assistive
-        technologies like screen magnifiers.
-      </p>
+      <section>
+        <h3><code>PointerLockOptions</code>
+        </h3>
+        <pre class="idl">
+          dictionary PointerLockOptions {
+            boolean unadjustedMovement = false;
+          };
+        </pre>
+	<dl>
+          <dt>
+              <dfn>PointerLockOptions</dfn> dictionary
+          </dt>
+          <dd>
+            <p>
+              The options dictionary to customize how the pointer should behave in
+              the locked mode.
+            </p>
+          </dd>
+          <dt>
+              <dfn><code>unadjustedMovement</code></dfn> attribute
+          </dt>
+          <dd>
+            <p>
+              If this value is set to true the pointer movements will not be effected
+              by the underlying platform modications such as mouse accelaration.
+            </p>
+          </dd>
+        </dl>
+      </section>
+      <section>
+        <h3>
+          <code>pointerlockchange</code> and <code>pointerlockerror</code> Events
+        </h3>
+        <p>
+          Two events are used to communicate pointer lock state change or an
+          error in changing state. They are named <dfn>pointerlockchange</dfn>
+          and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
+          for any reason a <a>pointerlockchange</a> event must be sent.
+        </p>
+        <p>
+          <a>User agents</a> must deliver these events by <a data-lt=
+          "queue a task">queuing a task</a> to <a>fire an event</a> of the
+          appropriate name with its <code>bubbles</code> attribute [[DOM]] set to
+          false to the pointer lock <a>target</a> element's <a>node document</a>.
+        </p>
+        <p class="note">
+          Magnification software increases the size of content on the screen. It
+          uses the mouse to move the magnified point of focus around. When a
+          pointer lock is initiated, the magnification software needs to switch
+          to using the keyboard to move the magnified point of focus around
+          instead. When a pointerlockchange event is fired, web browsers
+          therefore need to make sure the event is communicated to assistive
+          technologies like screen magnifiers.
+        </p>
+      </section>
     </section>
     <section data-dfn-for="Element" data-link-for="Element">
       <h2>
@@ -207,7 +241,7 @@
       </p>
       <pre class="idl">
         partial interface Element {
-          void requestPointerLock();
+          void requestPointerLock(optional PointerLockOptions options = {});
         };
       </pre>
       <dl>
@@ -216,17 +250,20 @@
         </dt>
         <dd>
           <p>
-            Requests that the pointer be locked to a DOM element
+            The <code>requestPointerLock(<var data-type="PointerLockOptions">options</var>)</code>
+            requests that the pointer be locked to a DOM element
             <dfn>target</dfn>. The <a>user agent</a> determines if pointer lock
             state will be entered and upon lock state change or error must send
             either a <a>pointerlockchange</a> or <a>pointerlockerror</a> event
-            respectively.
+            respectively. Let <var>unmodifiedMovement</var> be the result of getting
+            the property <code>unmodifiedMovement</code> from <var>options</var>.
           </p>
           <p>
             Pointer lock must not succeed if the document object's
             <a data-cite="html/origin.html#active-sandboxing-flag-set">active
             sandboxing flag set</a> has the <a>sandboxed pointer lock browsing
-            context flag</a> set.
+            context flag</a> set. It must also not succceed if the lock <var>options</var>
+            requested is not supported by the underlying platform.
           </p>
           <p>
             Pointer lock must not succeed unless the <a>target</a>'s
@@ -283,6 +320,15 @@
             mouse events to other elements. Events that require the concept of
             a mouse cursor must not be dispatched (for example: `mouseover`,
             `mouseout`, `drag`, and `drop`).
+          </p>
+          <p>
+            While in the locked state if <var>unmodifiedMovement</var>
+            is <code>true</code> the event coordinates must not be affected
+            by the underlying platform behaviors such as mouse acceleration.
+            In other words, UA must use the APIs provided by the underlying
+            platform to guaranteee getting the raw events. If <var>unmodifiedMovement</var>
+            is <code>undefined</code> or <code>false</code> UA must rely on the default
+            behavior of the underlying platform regarding the mouse acceleration.
           </p>
           <p>
             In the locked state the system mouse cursor must be hidden.
