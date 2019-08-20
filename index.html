@@ -176,29 +176,29 @@
         Pointer Lock and Interfaces
       </h2>
       <section>
-        <h3><code>PointerLockOptions</code>
+        <h3>`PointerLockOptions` dictionary
         </h3>
         <pre class="idl">
           dictionary PointerLockOptions {
             boolean unadjustedMovement = false;
           };
         </pre>
-	<dl>
+	<dl data-dfn-for="PointerLockOptions" data-link-for="PointerLockOptions">
           <dt>
               <dfn>PointerLockOptions</dfn> dictionary
           </dt>
           <dd>
             <p>
-              The options dictionary to customize how the pointer should behave in
+              The options dictionary to customize how the pointer behaves in
               the locked mode.
             </p>
           </dd>
           <dt>
-              <dfn><code>unadjustedMovement</code></dfn> attribute
+              <dfn>unadjustedMovement</dfn> member
           </dt>
           <dd>
             <p>
-              If this value is set to true the pointer movements will not be effected
+              If this value is set to `true`, then the pointer movements will not be affected
               by the underlying platform modications such as mouse accelaration.
             </p>
           </dd>
@@ -206,16 +206,16 @@
       </section>
       <section>
         <h3>
-          <code>pointerlockchange</code> and <code>pointerlockerror</code> Events
+          `"pointerlockchange"` and `"pointerlockerror"` Events
         </h3>
         <p>
           Two events are used to communicate pointer lock state change or an
-          error in changing state. They are named <dfn>pointerlockchange</dfn>
-          and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
-          for any reason a <a>pointerlockchange</a> event must be sent.
+          error in changing state. They are named <dfn>"pointerlockchange"</dfn>
+          and <code><dfn>"pointerlockerror"</dfn></code>. If pointer lock is entered or exited
+          for any reason a <a>"pointerlockchange"</a> even is dispatched.
         </p>
         <p>
-          <a>User agents</a> must deliver these events by <a data-lt=
+          Using the <a>user interaction task source</a>, a <a>user agent</a> MUST deliver these events by <a data-lt=
           "queue a task">queuing a task</a> to <a>fire an event</a> of the
           appropriate name with its <code>bubbles</code> attribute [[DOM]] set to
           false to the pointer lock <a>target</a> element's <a>node document</a>.
@@ -250,19 +250,19 @@
         </dt>
         <dd>
           <p>
-            The <code>requestPointerLock(<var data-type="PointerLockOptions">options</var>)</code>
+            The `requestPointerLock(<var data-type="PointerLockOptions">options</var>)`
             requests that the pointer be locked to a DOM element
             <dfn>target</dfn>. The <a>user agent</a> determines if pointer lock
             state will be entered and upon lock state change or error must send
             either a <a>pointerlockchange</a> or <a>pointerlockerror</a> event
             respectively. Let <var>unmodifiedMovement</var> be the result of getting
-            the property <code>unmodifiedMovement</code> from <var>options</var>.
+            the member `unmodifiedMovement` from <var>options</var>.
           </p>
           <p>
             Pointer lock must not succeed if the document object's
             <a data-cite="html/origin.html#active-sandboxing-flag-set">active
             sandboxing flag set</a> has the <a>sandboxed pointer lock browsing
-            context flag</a> set. It must also not succceed if the lock <var>options</var>
+            context flag</a> set. It MUST also not succceed if the lock <var>options</var>
             requested is not supported by the underlying platform.
           </p>
           <p>
