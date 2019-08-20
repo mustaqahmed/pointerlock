@@ -176,16 +176,18 @@
         Pointer Lock and Interfaces
       </h2>
       <section>
-        <h3>`PointerLockOptions` dictionary
+        <h3>
+          `PointerLockOptions` dictionary
         </h3>
         <pre class="idl">
           dictionary PointerLockOptions {
             boolean unadjustedMovement = false;
           };
         </pre>
-	<dl data-dfn-for="PointerLockOptions" data-link-for="PointerLockOptions">
+        <dl data-dfn-for="PointerLockOptions" data-link-for=
+        "PointerLockOptions">
           <dt>
-              <dfn>PointerLockOptions</dfn> dictionary
+            <dfn>PointerLockOptions</dfn> dictionary
           </dt>
           <dd>
             <p>
@@ -194,12 +196,13 @@
             </p>
           </dd>
           <dt>
-              <dfn>unadjustedMovement</dfn> member
+            <dfn>unadjustedMovement</dfn> member
           </dt>
           <dd>
             <p>
-              If this value is set to `true`, then the pointer movements will not be affected
-              by the underlying platform modications such as mouse accelaration.
+              If this value is set to `true`, then the pointer movements will
+              not be affected by the underlying platform modications such as
+              mouse accelaration.
             </p>
           </dd>
         </dl>
@@ -210,19 +213,22 @@
         </h3>
         <p>
           Two events are used to communicate pointer lock state change or an
-          error in changing state. They are named <dfn>"pointerlockchange"</dfn>
-          and <code><dfn>"pointerlockerror"</dfn></code>. If pointer lock is entered or exited
-          for any reason a <a>"pointerlockchange"</a> even is dispatched.
+          error in changing state. They are named
+          <dfn>"pointerlockchange"</dfn> and
+          <code><dfn>"pointerlockerror"</dfn></code>. If pointer lock is
+          entered or exited for any reason a <a>"pointerlockchange"</a> even is
+          dispatched.
         </p>
         <p>
-          Using the <a>user interaction task source</a>, a <a>user agent</a> MUST deliver these events by <a data-lt=
-          "queue a task">queuing a task</a> to <a>fire an event</a> of the
-          appropriate name with its <code>bubbles</code> attribute [[DOM]] set to
-          false to the pointer lock <a>target</a> element's <a>node document</a>.
+          Using the <a>user interaction task source</a>, a <a>user agent</a>
+          MUST deliver these events by <a data-lt="queue a task">queuing a
+          task</a> to <a>fire an event</a> of the appropriate name with its
+          <code>bubbles</code> attribute [[DOM]] set to false to the pointer
+          lock <a>target</a> element's <a>node document</a>.
         </p>
         <p class="note">
-          Magnification software increases the size of content on the screen. It
-          uses the mouse to move the magnified point of focus around. When a
+          Magnification software increases the size of content on the screen.
+          It uses the mouse to move the magnified point of focus around. When a
           pointer lock is initiated, the magnification software needs to switch
           to using the keyboard to move the magnified point of focus around
           instead. When a pointerlockchange event is fired, web browsers
@@ -250,20 +256,22 @@
         </dt>
         <dd>
           <p>
-            The `requestPointerLock(<var data-type="PointerLockOptions">options</var>)`
-            requests that the pointer be locked to a DOM element
-            <dfn>target</dfn>. The <a>user agent</a> determines if pointer lock
-            state will be entered and upon lock state change or error must send
-            either a <a>pointerlockchange</a> or <a>pointerlockerror</a> event
-            respectively. Let <var>unmodifiedMovement</var> be the result of getting
-            the member `unmodifiedMovement` from <var>options</var>.
+            The `requestPointerLock(<var data-type=
+            "PointerLockOptions">options</var>)` requests that the pointer be
+            locked to a DOM element <dfn>target</dfn>. The <a>user agent</a>
+            determines if pointer lock state will be entered and upon lock
+            state change or error must send either a <a>pointerlockchange</a>
+            or <a>pointerlockerror</a> event respectively. Let
+            <var>unmodifiedMovement</var> be the result of getting the member
+            `unmodifiedMovement` from <var>options</var>.
           </p>
           <p>
             Pointer lock must not succeed if the document object's
             <a data-cite="html/origin.html#active-sandboxing-flag-set">active
             sandboxing flag set</a> has the <a>sandboxed pointer lock browsing
-            context flag</a> set. It MUST also not succceed if the lock <var>options</var>
-            requested is not supported by the underlying platform.
+            context flag</a> set. It MUST also not succceed if the lock
+            <var>options</var> requested is not supported by the underlying
+            platform.
           </p>
           <p>
             Pointer lock must not succeed unless the <a>target</a>'s
@@ -322,13 +330,14 @@
             `mouseout`, `drag`, and `drop`).
           </p>
           <p>
-            While in the locked state if <var>unmodifiedMovement</var>
-            is <code>true</code> the event coordinates must not be affected
-            by the underlying platform behaviors such as mouse acceleration.
-            In other words, UA must use the APIs provided by the underlying
-            platform to guaranteee getting the raw events. If <var>unmodifiedMovement</var>
-            is <code>undefined</code> or <code>false</code> UA must rely on the default
-            behavior of the underlying platform regarding the mouse acceleration.
+            While in the locked state if <var>unmodifiedMovement</var> is
+            <code>true</code> the event coordinates must not be affected by the
+            underlying platform behaviors such as mouse acceleration. In other
+            words, UA must use the APIs provided by the underlying platform to
+            guaranteee getting the raw events. If <var>unmodifiedMovement</var>
+            is <code>undefined</code> or <code>false</code> UA must rely on the
+            default behavior of the underlying platform regarding the mouse
+            acceleration.
           </p>
           <p>
             In the locked state the system mouse cursor must be hidden.
