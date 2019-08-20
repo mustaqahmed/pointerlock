@@ -213,22 +213,20 @@
         </h3>
         <p>
           Two events are used to communicate pointer lock state change or an
-          error in changing state. They are named
-          <dfn>"pointerlockchange"</dfn> and
-          <code><dfn>"pointerlockerror"</dfn></code>. If pointer lock is
-          entered or exited for any reason a <a>"pointerlockchange"</a> even is
-          dispatched.
+          error in changing state. They are named <dfn>pointerlockchange</dfn>
+          and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
+          for any reason a <a>pointerlockchange</a> event must be sent.
         </p>
         <p>
-          Using the <a>user interaction task source</a>, a <a>user agent</a>
-          MUST deliver these events by <a data-lt="queue a task">queuing a
-          task</a> to <a>fire an event</a> of the appropriate name with its
-          <code>bubbles</code> attribute [[DOM]] set to false to the pointer
-          lock <a>target</a> element's <a>node document</a>.
+          <a>User agents</a> must deliver these events by <a data-lt=
+          "queue a task">queuing a task</a> to <a>fire an event</a> of the
+          appropriate name with its <code>bubbles</code> attribute [[DOM]] set to
+          false to the pointer lock <a>target</a> element's [=Node/node
+          document=].
         </p>
         <p class="note">
-          Magnification software increases the size of content on the screen.
-          It uses the mouse to move the magnified point of focus around. When a
+          Magnification software increases the size of content on the screen. It
+          uses the mouse to move the magnified point of focus around. When a
           pointer lock is initiated, the magnification software needs to switch
           to using the keyboard to move the magnified point of focus around
           instead. When a pointerlockchange event is fired, web browsers
