@@ -260,8 +260,8 @@
             determines if pointer lock state will be entered and upon lock
             state change or error must send either a <a>pointerlockchange</a>
             or <a>pointerlockerror</a> event respectively. Let
-            <var>unmodifiedMovement</var> be the result of getting the member
-            `unmodifiedMovement` from <var>options</var>.
+            <var>unadjustedMovement</var> be the result of getting the member
+            `unadjustedMovement` from <var>options</var>.
           </p>
           <p>
             Pointer lock must not succeed if the document object's
@@ -328,11 +328,11 @@
             `mouseout`, `drag`, and `drop`).
           </p>
           <p>
-            While in the locked state if <var>unmodifiedMovement</var> is
+            While in the locked state if <var>unadjustedMovement</var> is
             <code>true</code> the event coordinates must not be affected by the
             underlying platform behaviors such as mouse acceleration. In other
             words, UA must use the APIs provided by the underlying platform to
-            guaranteee getting the raw events. If <var>unmodifiedMovement</var>
+            guaranteee getting the raw events. If <var>unadjustedMovement</var>
             is <code>undefined</code> or <code>false</code> UA must rely on the
             default behavior of the underlying platform regarding the mouse
             acceleration.
